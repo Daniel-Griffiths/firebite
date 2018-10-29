@@ -20,7 +20,7 @@ export default class Album {
 	 */
 	public static async store(request) {
 		const response = await axios.post(`albums`, request)
-		return response.data.albumn
+		return response.data.album
 	}
 
 	/**
@@ -31,7 +31,7 @@ export default class Album {
 	 */
 	public static async show({ id }) {
 		const response = await axios.get(`albums/${id}`)
-		return response.data.albumn
+		return response.data.album
 	}
 
 	/**
@@ -45,7 +45,7 @@ export default class Album {
 			title,
 			_method: 'put',
 		})
-		return response.data.albumn
+		return response.data.album
 	}
 
 	/**
