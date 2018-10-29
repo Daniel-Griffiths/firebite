@@ -1,6 +1,18 @@
 import React, { Component, Fragment } from 'react';
 
+/**
+ * Components
+ */
+import { MusicPlayer } from './../components'
+
+/**
+ * Models
+ */
 import { Album } from './../models'
+
+/**
+ * Interfaces
+ */
 import { AlbumInterface } from './../interfaces'
 
 interface State {
@@ -47,23 +59,9 @@ export default class HomeContainer extends Component<{}, State> {
    * @return {jsx}
    */
   public render() {
-
-    const { albums } = this.state
-
     return (
       <Fragment>
-        { albums.map(album => 
-          <div key={`album-${album.id}`}>
-            <h1>{album.title}</h1>
-            <ul>
-              { album.tracks.map(track => 
-                <li key={`track-${track.id}`}>
-                  {track.length} - {track.title}
-                </li>
-              )}
-            </ul>
-          </div>
-        )}
+        <MusicPlayer albums={this.state.albums}/>
       </Fragment>
     );
   }
