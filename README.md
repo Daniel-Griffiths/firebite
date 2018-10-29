@@ -12,7 +12,7 @@ Then rename `.env.example` to `.env` and enter the relevant api details
 
 # API
 
-*albums*
+### Albums
 
 See `models/Album` class for full documentation
 
@@ -48,7 +48,7 @@ See `models/Album` class for full documentation
 	});
 ```
 
-*tracks*
+### Tracks
 
 See `models/Tracks` class for full documentation
 
