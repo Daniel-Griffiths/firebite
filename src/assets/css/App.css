@@ -1,0 +1,54 @@
+/*
+|--------------------------------------
+| Variables
+|--------------------------------------
+|
+*/
+
+:root {
+  --brand-color-primary: #002c5f;
+  --brand-color-secondary: #5379a2;
+}
+
+/*
+|--------------------------------------
+| Core Styles
+|--------------------------------------
+|
+*/
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  height: 100%;
+  font-size: 18px;
+  font-family: 'Source Sans Pro', sans-serif;
+  background: linear-gradient(135deg, #3023ae 0%, #c86dd7 100%);
+}
+
+#app-root {
+  height: 100%;
+  animation: fadeIn 1s ease;
+}
+
+/*
+|--------------------------------------
+| Animations
+|--------------------------------------
+|
+*/
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
