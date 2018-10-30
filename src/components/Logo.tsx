@@ -24,13 +24,11 @@ export default class Logo extends Component {
 }
 
 const StyledLogo = styled.div`
-    top: 1rem;
-    left: 1rem;
-    opacity: .5;
     display: flex;
-    position: fixed;
+    cursor: default;
     align-items: center;
     letter-spacing: 4px;
+    transition: .3s ease;
     text-transform: uppercase;
 `
 

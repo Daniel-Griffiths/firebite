@@ -31,6 +31,7 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   background: linear-gradient(135deg, #3023ae 0%, #c86dd7 100%);
   background-attachment: fixed;
+  padding-top: 5rem; /* to offset the nav */
 }
 
 body{
@@ -40,6 +41,35 @@ body{
 #app-root {
   min-height: 100%;
   animation: fadeIn 1s ease;
+}
+
+input:not([type='checkbox']),
+button,
+select,
+textarea {
+  background: #fff;
+  box-shadow: none;
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+input,
+textarea {
+  width: 100%;
+}
+
+label{
+  color: #000;
+  display: block;
+  padding-bottom: 1rem;
+}
+
+button{
+  cursor: pointer;
 }
 
 /*

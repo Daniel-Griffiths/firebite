@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 /**
  * Components
  */
-import { Logo, MusicPlayer, Container } from './../components'
+import { MusicPlayer, Container } from './../components'
 
 /**
  * Models
@@ -69,7 +69,6 @@ export default class HomeContainer extends Component<{}, State> {
   public render() {
     return (
       <Container>
-        <Logo/>
         <MusicPlayer 
           albums={this.state.albums}
           setAlbumState={this.setAlbumState}

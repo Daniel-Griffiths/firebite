@@ -6,7 +6,7 @@ export default styled.button`
 	padding: .5em 1em;
 	border-radius: 3px;
 	transition: 0.3s ease;
-	border: 3px solid #fff;
+	border: 1px solid #fff;
 	background: transparent;
 	&:hover {
 		color: #3023ae;
