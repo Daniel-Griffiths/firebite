@@ -26,7 +26,7 @@ body {
   margin: 0;
   padding: 0;
   color: #fff;
-  height: 100%;
+  min-height: 100%;
   font-size: 18px;
   font-family: 'Source Sans Pro', sans-serif;
   background: linear-gradient(135deg, #3023ae 0%, #c86dd7 100%);
@@ -38,7 +38,7 @@ body{
 }
 
 #app-root {
-  height: 100%;
+  min-height: 100%;
   animation: fadeIn 1s ease;
 }
 

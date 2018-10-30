@@ -1,9 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react'
 
 /**
  * Components
  */
-import { MusicPlayer } from './../components'
+import { Logo, MusicPlayer, Container } from './../components'
 
 /**
  * Models
@@ -49,7 +49,7 @@ export default class HomeContainer extends Component<{}, State> {
    */
   public componentDidMount() {
     Album.index().then(albums => {
-      this.setState({ albums })
+      this.setState({ albums: albums.reverse() })
     })
   }
 
@@ -68,12 +68,13 @@ export default class HomeContainer extends Component<{}, State> {
    */
   public render() {
     return (
-      <Fragment>
+      <Container>
+        <Logo/>
         <MusicPlayer 
           albums={this.state.albums}
           setAlbumState={this.setAlbumState}
         />
-      </Fragment>
+      </Container>
     );
   }
 }

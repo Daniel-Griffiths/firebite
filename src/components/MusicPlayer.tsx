@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes, faEdit } from '@fortawesome/free-solid-svg-icons'
 
 /**
  * Components
@@ -52,7 +54,7 @@ export default class HomeContainer extends Component<Props> {
       title: e.target.title.value
     }).then(album => {
       const albums = this.props.albums
-      albums.push(album)
+      albums.unshift(album)
       this.props.setAlbumState(albums)
       this.toggleAlbumModal()
     })
@@ -110,8 +112,12 @@ export default class HomeContainer extends Component<Props> {
                     {this.formatTrackLength(track.length)} 
                   </div>
                   <div>
-                    <Button onClick={() => null} className="ml-2 mr-2">Edit Track</Button>
-                    <Button onClick={() => null}>Delete Track</Button>
+                    <Button onClick={() => null} className="ml-2 mr-2">
+                      <FontAwesomeIcon icon={faEdit} />
+                    </Button>
+                    <Button onClick={() => null}>
+                      <FontAwesomeIcon icon={faTimes} />
+                    </Button>
                   </div>
                 </TrackListItem>
               )}

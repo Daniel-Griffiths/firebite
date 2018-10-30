@@ -21,5 +21,5 @@ const StyledTrackListItem = styled.li`
   display: flex;
   padding: .5rem 0;
   align-items: center;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid rgba(255,255,255,.5);
 `
