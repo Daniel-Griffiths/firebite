@@ -14,7 +14,7 @@ import TrackListItem from './TrackListItem'
 /**
  * Models
  */
-import { Album } from './../models'
+import { Album, Track } from './../models'
 
 /**
  * Interfaces
@@ -29,7 +29,9 @@ interface Props {
 export default class HomeContainer extends Component<Props> {
 
   public state = {
-    showAlbumModal: false
+    showAlbumModal: false,
+    showTrackModal: false,
+    selectedAlbumId: 0,
   }
 
   /**
@@ -37,8 +39,18 @@ export default class HomeContainer extends Component<Props> {
    * 
    * @return {void} 
    */
-  public toggleAlbumModal = () => {
-    this.setState({ showAlbumModal: !this.state.showAlbumModal })
+  public toggleAlbumModal = () => this.setState({ showAlbumModal: !this.state.showAlbumModal })
+
+  /**
+   * Show/Hide the modal.
+   * 
+   * @return {void} 
+   */
+  public toggleTrackModal = (id) => {
+    this.setState({ 
+      selectedAlbumId: id,
+      showTrackModal: !this.state.showTrackModal, 
+    })
   }
 
   /**
@@ -57,6 +69,27 @@ export default class HomeContainer extends Component<Props> {
       albums.unshift(album)
       this.props.setAlbumState(albums)
       this.toggleAlbumModal()
+    })
+  }
+
+  /**
+   * Add a new track.
+   * 
+   * @param  {object} e 
+   * @return {void}   
+   */
+  public addTrack = e => {
+    e.preventDefault()
+
+    Track.store({
+      albumId: this.state.selectedAlbumId,  
+      title: e.target.title.value,
+      length: e.target.length.value,
+    }).then(track => {
+      // let albums = this.props.albums
+      // albums = albums[this.state.selectedAlbumId].tracks.push(track)
+      // this.props.setAlbumState(albums)
+      this.toggleTrackModal(0)
     })
   }
 
@@ -100,7 +133,7 @@ export default class HomeContainer extends Component<Props> {
             <Title>{album.title}</Title>
             <Button rounded={true} onClick={() => this.deleteAlbum(album.id)} className="mr-2">Delete Album</Button>
             <Button rounded={true} onClick={() => null} className="mr-2">Edit Album</Button>
-            <Button rounded={true} onClick={() => null}>Add Track</Button>
+            <Button rounded={true} onClick={() => this.toggleTrackModal(album.id)}>Add Track</Button>
             <TrackList 
               tracks={album.tracks}
               render={track => (
@@ -124,6 +157,7 @@ export default class HomeContainer extends Component<Props> {
             />
           </Fragment>
         )}
+
         <Modal show={this.state.showAlbumModal}>
           <form onSubmit={this.addAlbum}>
             <label htmlFor="album-title">Album Title</label>
@@ -132,6 +166,18 @@ export default class HomeContainer extends Component<Props> {
             <button>Submit</button>
           </form>
         </Modal>
+
+        <Modal show={this.state.showTrackModal}>
+          <form onSubmit={this.addTrack}>
+            <label htmlFor="track-title">Track Title</label>
+            <input name="title" id="track-title" className="mb-4" required={true}/>
+            <label htmlFor="track-length">Track Length (in seconds)</label>
+            <input name="length" id="track-length" className="mb-4" type="number" required={true}/>
+            <button type="button" className="mr-4" onClick={this.toggleTrackModal}>Cancel</button>
+            <button>Submit</button>
+          </form>
+        </Modal>
+
       </Fragment>
     );
   }
