@@ -94,13 +94,13 @@ export default class HomeContainer extends Component<Props> {
 
     return (
       <Fragment>
-        <Button onClick={this.toggleAlbumModal}>Add Album</Button>
+        <Button rounded={true} onClick={this.toggleAlbumModal}>Add Album</Button>
         { albums && albums.map(album => 
           <Fragment key={`album-${album.id}`}>
             <Title>{album.title}</Title>
-            <Button onClick={() => this.deleteAlbum(album.id)} className="mr-2">Delete Album</Button>
-            <Button onClick={() => null} className="mr-2">Edit Album</Button>
-            <Button onClick={() => null}>Add Track</Button>
+            <Button rounded={true} onClick={() => this.deleteAlbum(album.id)} className="mr-2">Delete Album</Button>
+            <Button rounded={true} onClick={() => null} className="mr-2">Edit Album</Button>
+            <Button rounded={true} onClick={() => null}>Add Track</Button>
             <TrackList 
               tracks={album.tracks}
               render={track => (
