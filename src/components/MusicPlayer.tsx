@@ -29,9 +29,10 @@ interface Props {
 export default class HomeContainer extends Component<Props> {
 
   public state = {
-    showAlbumModal: false,
-    showTrackModal: false,
     selectedAlbumId: 0,
+    showAddAlbumModal: false,
+    showAddTrackModal: false,
+    showEditAlbumModal: false,
   }
 
   /**
@@ -39,17 +40,24 @@ export default class HomeContainer extends Component<Props> {
    * 
    * @return {void} 
    */
-  public toggleAlbumModal = () => this.setState({ showAlbumModal: !this.state.showAlbumModal })
+  public toggleAddAlbumModal = () => this.setState({ showAddAlbumModal: !this.state.showAddAlbumModal })
 
   /**
    * Show/Hide the modal.
    * 
    * @return {void} 
    */
-  public toggleTrackModal = (id) => {
+  public toggleEditAlbumModal = () => this.setState({ showEditAlbumModal: !this.state.showEditAlbumModal })
+
+  /**
+   * Show/Hide the modal.
+   * 
+   * @return {void} 
+   */
+  public toggleAddTrackModal = (id) => {
     this.setState({ 
       selectedAlbumId: id,
-      showTrackModal: !this.state.showTrackModal, 
+      showAddTrackModal: !this.state.showAddTrackModal, 
     })
   }
 
@@ -68,8 +76,18 @@ export default class HomeContainer extends Component<Props> {
       const albums = this.props.albums
       albums.unshift(album)
       this.props.setAlbumState(albums)
-      this.toggleAlbumModal()
+      this.toggleAddAlbumModal()
     })
+  }
+
+  /**
+   * Edit an existing album.
+   * 
+   * @param  {object} e 
+   * @return {void}   
+   */
+  public editAlbum = e => {
+    e.preventDefault()
   }
 
   /**
@@ -89,7 +107,7 @@ export default class HomeContainer extends Component<Props> {
       // let albums = this.props.albums
       // albums = albums[this.state.selectedAlbumId].tracks.push(track)
       // this.props.setAlbumState(albums)
-      this.toggleTrackModal(0)
+      this.toggleAddTrackModal(0)
     })
   }
 
@@ -127,13 +145,13 @@ export default class HomeContainer extends Component<Props> {
 
     return (
       <Fragment>
-        <Button rounded={true} onClick={this.toggleAlbumModal}>Add Album</Button>
+        <Button rounded={true} onClick={this.toggleAddAlbumModal}>Add Album</Button>
         { albums && albums.map(album => 
           <Fragment key={`album-${album.id}`}>
             <Title>{album.title}</Title>
             <Button rounded={true} onClick={() => this.deleteAlbum(album.id)} className="mr-2">Delete Album</Button>
-            <Button rounded={true} onClick={() => null} className="mr-2">Edit Album</Button>
-            <Button rounded={true} onClick={() => this.toggleTrackModal(album.id)}>Add Track</Button>
+            <Button rounded={true} onClick={() => this.toggleEditAlbumModal()} className="mr-2">Edit Album</Button>
+            <Button rounded={true} onClick={() => this.toggleAddTrackModal(album.id)}>Add Track</Button>
             <TrackList 
               tracks={album.tracks}
               render={track => (
@@ -158,22 +176,31 @@ export default class HomeContainer extends Component<Props> {
           </Fragment>
         )}
 
-        <Modal show={this.state.showAlbumModal}>
+        <Modal show={this.state.showAddAlbumModal}>
           <form onSubmit={this.addAlbum}>
             <label htmlFor="album-title">Album Title</label>
             <input name="title" id="album-title" className="mb-4" required={true}/>
-            <button type="button" className="mr-4" onClick={this.toggleAlbumModal}>Cancel</button>
+            <button type="button" className="mr-4" onClick={this.toggleAddAlbumModal}>Cancel</button>
             <button>Submit</button>
           </form>
         </Modal>
 
-        <Modal show={this.state.showTrackModal}>
+        <Modal show={this.state.showEditAlbumModal}>
+          <form onSubmit={this.editAlbum}>
+            <label htmlFor="album-title">Album Title</label>
+            <input name="title" id="album-title" className="mb-4" required={true}/>
+            <button type="button" className="mr-4" onClick={this.toggleEditAlbumModal}>Cancel</button>
+            <button>Submit</button>
+          </form>
+        </Modal>
+
+        <Modal show={this.state.showAddTrackModal}>
           <form onSubmit={this.addTrack}>
             <label htmlFor="track-title">Track Title</label>
             <input name="title" id="track-title" className="mb-4" required={true}/>
             <label htmlFor="track-length">Track Length (in seconds)</label>
             <input name="length" id="track-length" className="mb-4" type="number" required={true}/>
-            <button type="button" className="mr-4" onClick={this.toggleTrackModal}>Cancel</button>
+            <button type="button" className="mr-4" onClick={this.toggleAddTrackModal}>Cancel</button>
             <button>Submit</button>
           </form>
         </Modal>
