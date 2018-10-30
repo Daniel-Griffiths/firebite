@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment } from 'react'
 
 /**
  * Components
@@ -71,6 +71,17 @@ export default class HomeContainer extends Component<Props> {
   }
 
   /**
+   * Convert the track length from seconds and
+   * add a little formatting to spice things up.
+   * 
+   * @param  {number} seconds 
+   * @return {number}        
+   */
+  public formatTrackLength = (seconds) => {
+    return (seconds / 60).toFixed(2).replace('.',':');
+  }
+
+  /**
    * Render the component
    *
    * @return {jsx}
@@ -85,12 +96,23 @@ export default class HomeContainer extends Component<Props> {
         { albums && albums.map(album => 
           <Fragment key={`album-${album.id}`}>
             <Title>{album.title}</Title>
-            <Button onClick={() => this.deleteAlbum(album.id)}>Delete Album</Button>
+            <Button onClick={() => this.deleteAlbum(album.id)} className="mr-2">Delete Album</Button>
+            <Button onClick={() => null} className="mr-2">Edit Album</Button>
+            <Button onClick={() => null}>Add Track</Button>
             <TrackList 
               tracks={album.tracks}
               render={track => (
                 <TrackListItem key={`track-${track.id}`}>
-                  {track.length} - {track.title}
+                  <div className="mr-a">
+                    {track.title}
+                  </div>
+                  <div>
+                    {this.formatTrackLength(track.length)} 
+                  </div>
+                  <div>
+                    <Button onClick={() => null} className="ml-2 mr-2">Edit Track</Button>
+                    <Button onClick={() => null}>Delete Track</Button>
+                  </div>
                 </TrackListItem>
               )}
             />
