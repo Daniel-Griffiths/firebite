@@ -126,7 +126,7 @@ export default class HomeContainer extends Component<Props> {
         )}
         <Modal show={this.state.showAlbumModal}>
           <form onSubmit={this.addAlbum}>
-            <input name="title" placeholder="Album Title"/>
+            <input name="title" placeholder="Album Title" required={true}/>
             <button>Submit</button>
           </form>
         </Modal>

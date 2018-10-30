@@ -1,8 +1,31 @@
+import posed from 'react-pose'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import React, { Component } from 'react'
 
 const modalRoot = document.getElementById('modal-root') as any
+
+const ModalContainer = posed.div({
+  enter: {
+    y: 0,
+    opacity: 1,
+    delay: 300,
+    transition: {
+      y: { type: 'spring', stiffness: 1000, damping: 15 },
+      default: { duration: 300 }
+    }
+  },
+  exit: {
+    y: 50,
+    opacity: 0,
+    transition: { duration: 150 }
+  }
+});
+
+const ModalShade = posed.div({
+  enter: { opacity: 1 },
+  exit: { opacity: 0 }
+});
 
 interface Props {
 	show: boolean
@@ -29,20 +52,23 @@ export default class Modal extends Component<Props> {
 	}
 
 	public render() {
-		if (this.props.show) {
-		  return ReactDOM.createPortal(
-		    <StyledModal {...this.props}>
-		      <StyledModalContainer>{this.props.children}</StyledModalContainer>
-		    </StyledModal>,
-		    this.el
-		  )
-		}
 
-		return null
+		const { show } = this.props
+
+		return ReactDOM.createPortal(
+			<StyledModalShade 
+				key="modal" {...this.props}
+				pose={show ? 'enter' : 'exit'} 
+				style={{ pointerEvents: show ? 'all' : 'none' }}
+			>
+	  			<StyledModalContainer pose={show ? 'enter' : 'exit'} key="model-container">{this.props.children}</StyledModalContainer>
+			</StyledModalShade>
+			,this.el
+		)
 	}
 }
 
-const StyledModal = styled.div`
+const StyledModalShade = styled(ModalShade)`
   top: 0px;
   left: 0px;
   width: 100%;
@@ -56,7 +82,7 @@ const StyledModal = styled.div`
   background: rgba(0, 0, 0, 0.8);
 `
 
-const StyledModalContainer = styled.div`
+const StyledModalContainer = styled(ModalContainer)`
   width: 100%;
   padding: 1rem;
   background: #fff;
