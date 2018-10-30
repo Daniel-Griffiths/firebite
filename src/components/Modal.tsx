@@ -28,7 +28,7 @@ const ModalShade = posed.div({
 });
 
 interface Props {
-	show: boolean
+	show: boolean,
 }
 
 export default class Modal extends Component<Props> {

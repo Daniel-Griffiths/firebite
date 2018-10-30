@@ -35,6 +35,45 @@ export default class HomeContainer extends Component<Props> {
     showEditAlbumModal: false,
   }
 
+  constructor(props) {
+    super(props)
+    this.closeModalKeypress = this.closeModalKeypress.bind(this)
+  }  
+
+  /**
+   * Mount the component.
+   * 
+   * @return {void} 
+   */
+  public componentDidMount() {
+    document.addEventListener('keydown', this.closeModalKeypress, false)
+  }
+
+  /**
+   * Unmount the component.
+   * 
+   * @return {void} 
+   */
+  public componentWillUnmount() {
+    document.removeEventListener('keydown', this.closeModalKeypress, false)
+  }  
+
+  /**
+   * Close all modals when pressing the esc key
+   * 
+   * @param  {object} e 
+   * @return {void}   
+   */
+  public closeModalKeypress(e) {
+    if (e.keyCode === 27) {
+      this.setState({
+        showAddAlbumModal: false,
+        showAddTrackModal: false,
+        showEditAlbumModal: false,
+      })
+    }
+  }  
+
   /**
    * Show/Hide the modal.
    * 
