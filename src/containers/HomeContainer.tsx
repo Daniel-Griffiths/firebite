@@ -47,11 +47,19 @@ export default class HomeContainer extends Component<{}, State> {
    * 
    * @return {void} 
    */
-  public componentDidMount(){
+  public componentDidMount() {
     Album.index().then(albums => {
       this.setState({ albums })
     })
   }
+
+  /**
+   * Allow child components to update the album state
+   * 
+   * @param  {object} albums 
+   * @return {void}       
+   */
+  public setAlbumState = (albums) => this.setState({ albums })
 
   /**
    * Render the component
@@ -61,7 +69,10 @@ export default class HomeContainer extends Component<{}, State> {
   public render() {
     return (
       <Fragment>
-        <MusicPlayer albums={this.state.albums}/>
+        <MusicPlayer 
+          albums={this.state.albums}
+          setAlbumState={this.setAlbumState}
+        />
       </Fragment>
     );
   }

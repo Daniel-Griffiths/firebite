@@ -32,6 +32,10 @@ body {
   background: linear-gradient(135deg, #3023ae 0%, #c86dd7 100%);
 }
 
+body{
+  padding: 1rem;
+}
+
 #app-root {
   height: 100%;
   animation: fadeIn 1s ease;
@@ -52,3 +56,15 @@ body {
     opacity: 1;
   }
 }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
