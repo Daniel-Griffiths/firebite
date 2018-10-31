@@ -1,5 +1,11 @@
+import posed from 'react-pose'
 import styled from 'styled-components'
 import React, { Component } from 'react';
+
+const AnimatedTrackListItem = posed.li({
+  open: { y: 0, opacity: 1 },
+  closed: { y: 20, opacity: 0 }
+});
 
 export default class TrackListItem extends Component {
 
@@ -17,7 +23,7 @@ export default class TrackListItem extends Component {
   }
 }
 
-const StyledTrackListItem = styled.li`
+const StyledTrackListItem = styled(AnimatedTrackListItem)`
   display: flex;
   padding: .5rem 0;
   align-items: center;

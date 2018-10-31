@@ -1,5 +1,14 @@
+import posed from 'react-pose'
 import styled from 'styled-components'
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+
+const AnimatedTrackList = posed.ul({
+  open: {
+    delayChildren: 200,
+    staggerChildren: 50
+  },
+  closed: { delay: 300 }
+});
 
 /**
  * Interfaces
@@ -13,6 +22,20 @@ interface Props {
 
 export default class TrackList extends Component<Props> {
 
+  public state = {
+    pose: 'closed'
+  }
+
+  /**
+   * Mount the component.
+   * 
+   * @return {void} 
+   */
+  public componentDidMount(){
+    // This 1ms delay is required for pose to animation on mount
+    setTimeout(() => this.setState({ pose: 'open' }), 1)
+  }
+
   /**
    * Render the component
    *
@@ -24,14 +47,14 @@ export default class TrackList extends Component<Props> {
     console.log(tracks)
 
   	return (
-  		<StyledTrackList>
+  		<StyledTrackList pose={this.state.pose}>
   			{tracks && tracks.length ? tracks.map(track => this.props.render(track)) : <p>Try adding some tracks!</p>}
   		</StyledTrackList>
   	)
   }
 }
 
-const StyledTrackList = styled.ul`
+const StyledTrackList = styled(AnimatedTrackList)`
 	margin: 0;
 	padding: 0;
 	list-style: none;
