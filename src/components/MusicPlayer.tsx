@@ -129,6 +129,18 @@ export default class HomeContainer extends Component<Props> {
   }
 
   /**
+   * Delete a album.
+   * 
+   * @param  {number} id 
+   * @return {void}   
+   */
+  public deleteAlbum = id => {
+    Album.destroy({ id }).then(response => {
+      this.props.setAlbumState(this.props.albums.filter(album => album.id !== id))
+    })
+  }
+
+  /**
    * Add a new track.
    * 
    * @param  {object} e 
@@ -148,14 +160,15 @@ export default class HomeContainer extends Component<Props> {
   }
 
   /**
-   * Add a new album.
-   * 
+   * Delete a track.
+   *
+   * @param  {number} albumId 
    * @param  {number} id 
    * @return {void}   
    */
-  public deleteAlbum = id => {
-    Album.destroy({ id }).then(response => {
-      this.props.setAlbumState(this.props.albums.filter(album => album.id !== id))
+  public deleteTrack = ({ albumId, id }) => {
+    Track.destroy({ albumId, id }).then(response => {
+      this.props.reloadAlbums()
     })
   }
 
@@ -202,7 +215,7 @@ export default class HomeContainer extends Component<Props> {
                     <Button onClick={() => null} className="ml-2 mr-2">
                       <FontAwesomeIcon icon={faEdit} />
                     </Button>
-                    <Button onClick={() => null}>
+                    <Button onClick={() => this.deleteTrack({ albumId: album.id, id: track.id })}>
                       <FontAwesomeIcon icon={faTimes} />
                     </Button>
                   </div>
