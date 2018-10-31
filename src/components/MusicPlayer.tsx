@@ -10,6 +10,7 @@ import Logo from './Logo'
 import Modal from './Modal'
 import Title from './Title'
 import Button from './Button'
+import AlbumList from './AlbumList'
 import TrackList from './TrackList'
 import Placeholder from './Placeholder'
 import TrackListItem from './TrackListItem'
@@ -275,7 +276,7 @@ export default class HomeContainer extends Component<Props> {
           <Button rounded={true} onClick={this.toggleAddAlbumModal}>Add Album</Button>
         </Nav>
         { albums && albums.length ? albums.map(album => 
-          <Fragment key={`album-${album.id}`}>
+          <AlbumList key={`album-${album.id}`}>
             <Title>{album.title}</Title>
             <Button rounded={true} onClick={() => this.deleteAlbum(album.id)} className="mr-2">Delete Album</Button>
             <Button rounded={true} onClick={() => this.toggleEditAlbumModal(album.id)} className="mr-2">Edit Album</Button>
@@ -302,7 +303,7 @@ export default class HomeContainer extends Component<Props> {
                 </TrackListItem>
               )}
             />
-          </Fragment>
+          </AlbumList>
         ) : <Placeholder/>}
 
         <Modal show={this.state.showAddAlbumModal}>

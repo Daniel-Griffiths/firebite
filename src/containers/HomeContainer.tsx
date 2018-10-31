@@ -58,7 +58,7 @@ export default class HomeContainer extends Component<{}, State> {
    */
   public fetchAlbums = () => {
     Album.index().then(albums => {
-      this.setState({ albums: albums.reverse() })
+      this.setState({ albums })
     })
   }
 
