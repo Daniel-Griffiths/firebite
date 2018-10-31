@@ -27,5 +27,5 @@ const StyledTrackListItem = styled(AnimatedTrackListItem)`
   display: flex;
   padding: .5rem 0;
   align-items: center;
-  border-bottom: 1px solid rgba(255,255,255,.5);
+  border-bottom: 1px solid rgba(255,255,255,.2);
 `

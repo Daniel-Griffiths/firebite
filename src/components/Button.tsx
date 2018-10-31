@@ -9,7 +9,7 @@ export default styled.button`
 	border: 1px solid #fff;
 	background: transparent;
 	&:hover {
-		color: #3023ae;
+		color: var(--brand-color-primary);
 		background: #fff;
 	}
 `

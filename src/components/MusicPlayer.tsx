@@ -1,3 +1,4 @@
+import swal from 'sweetalert'
 import React, { Component, Fragment } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faEdit } from '@fortawesome/free-solid-svg-icons'
@@ -187,8 +188,18 @@ export default class HomeContainer extends Component<Props> {
    * @return {void}   
    */
   public deleteAlbum = (id) => {
-    Album.destroy({ id }).then(response => {
-      this.props.setAlbumState(this.props.albums.filter(album => album.id !== id))
+    swal({
+      title: 'Are you sure?',
+      text: 'Are you sure you want to delete this album?',
+      icon: 'warning',
+      buttons: [true, true],
+    })
+    .then(confirm => {
+      if (confirm) {
+        Album.destroy({ id }).then(response => {
+          this.props.setAlbumState(this.props.albums.filter(album => album.id !== id))
+        })
+      }
     })
   }
 
@@ -244,9 +255,19 @@ export default class HomeContainer extends Component<Props> {
    * @return {void}   
    */
   public deleteTrack = ({ albumId, id }) => {
-    Track.destroy({ albumId, id }).then(response => {
-      this.props.reloadAlbums()
+    swal({
+      title: 'Are you sure?',
+      text: 'Are you sure you want to delete this track?',
+      icon: 'warning',
+      buttons: [true, true],
     })
+    .then(confirm => {
+      if (confirm) {
+        Track.destroy({ albumId, id }).then(response => {
+          this.props.reloadAlbums()
+        })
+      }
+    })    
   }
 
   /**
