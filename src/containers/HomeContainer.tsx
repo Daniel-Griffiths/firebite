@@ -48,10 +48,26 @@ export default class HomeContainer extends Component<{}, State> {
    * @return {void} 
    */
   public componentDidMount() {
+    this.fetchAlbums()
+  }
+
+  /**
+   * Fetch the album data.
+   * 
+   * @return {void}
+   */
+  public fetchAlbums = () => {
     Album.index().then(albums => {
       this.setState({ albums: albums.reverse() })
     })
   }
+
+  /**
+   * Refetch the album data
+   * 
+   * @return {void}       
+   */
+  public reloadAlbums = () => this.fetchAlbums()
 
   /**
    * Allow child components to update the album state
@@ -71,6 +87,7 @@ export default class HomeContainer extends Component<{}, State> {
       <Container>
         <MusicPlayer 
           albums={this.state.albums}
+          reloadAlbums={this.reloadAlbums}
           setAlbumState={this.setAlbumState}
         />
       </Container>

@@ -23,7 +23,8 @@ import { AlbumInterface } from './../interfaces'
 
 interface Props {
   albums?: AlbumInterface[],
-  setAlbumState: any
+  setAlbumState: any,
+  reloadAlbums: any
 }
 
 export default class HomeContainer extends Component<Props> {
@@ -112,9 +113,7 @@ export default class HomeContainer extends Component<Props> {
     Album.store({
       title: e.target.title.value
     }).then(album => {
-      const albums = this.props.albums
-      albums.unshift(album)
-      this.props.setAlbumState(albums)
+      this.props.reloadAlbums()
       this.toggleAddAlbumModal()
     })
   }
@@ -143,9 +142,7 @@ export default class HomeContainer extends Component<Props> {
       title: e.target.title.value,
       length: e.target.length.value,
     }).then(track => {
-      // let albums = this.props.albums
-      // albums = albums[this.state.selectedAlbumId].tracks.push(track)
-      // this.props.setAlbumState(albums)
+      this.props.reloadAlbums()
       this.toggleAddTrackModal(0)
     })
   }
@@ -185,7 +182,7 @@ export default class HomeContainer extends Component<Props> {
     return (
       <Fragment>
         <Button rounded={true} onClick={this.toggleAddAlbumModal}>Add Album</Button>
-        { albums && albums.map(album => 
+        { albums && albums.length ? albums.map(album => 
           <Fragment key={`album-${album.id}`}>
             <Title>{album.title}</Title>
             <Button rounded={true} onClick={() => this.deleteAlbum(album.id)} className="mr-2">Delete Album</Button>
@@ -213,7 +210,7 @@ export default class HomeContainer extends Component<Props> {
               )}
             />
           </Fragment>
-        )}
+        ) : <p>Try adding some albums!</p>}
 
         <Modal show={this.state.showAddAlbumModal}>
           <form onSubmit={this.addAlbum}>

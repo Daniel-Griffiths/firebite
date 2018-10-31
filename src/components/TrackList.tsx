@@ -21,10 +21,11 @@ export default class TrackList extends Component<Props> {
   public render() {
 
   	const { tracks } = this.props
+    console.log(tracks)
 
   	return (
   		<StyledTrackList>
-  			{tracks && tracks.map(track => this.props.render(track))}
+  			{tracks && tracks.length ? tracks.map(track => this.props.render(track)) : <p>Try adding some tracks!</p>}
   		</StyledTrackList>
   	)
   }
