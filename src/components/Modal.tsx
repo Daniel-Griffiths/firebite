@@ -75,9 +75,9 @@ const StyledModalShade = styled(ModalShade)`
   z-index: 100;
   height: 100%;
   display: flex;
-  animation: fadein 0.3s;
-  position: absolute;
+  position: fixed;
   align-items: center;
+  animation: fadein 0.3s;
   justify-content: center;
   background: rgba(0, 0, 0, 0.8);
 `

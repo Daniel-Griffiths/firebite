@@ -38,4 +38,5 @@ export default class AlbumList extends Component {
 }
 
 const StyledTrackListItem = styled(AnimatedAlbumList)`
+	margin-bottom: 3rem;
 `

@@ -2,6 +2,8 @@
 
 An api driven music manager written in React.
 
+![App Image](screenshot.png)
+
 # Usage 
 
 Install all the dependencies 
