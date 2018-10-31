@@ -8,6 +8,7 @@
 :root {
   --brand-color-primary: #002c5f;
   --brand-color-secondary: #5379a2;
+  --body-offset: 4.2rem;
 }
 
 /*
@@ -31,11 +32,10 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   background: linear-gradient(135deg, #3023ae 0%, #c86dd7 100%);
   background-attachment: fixed;
-  padding-top: 5rem; /* to offset the nav */
 }
 
 body{
-  padding: 1rem;
+  padding-top: var(--body-offset); /* to offset the nav */  
 }
 
 #app-root {
@@ -97,6 +97,15 @@ button{
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 

@@ -6,7 +6,11 @@ import React, { Component } from 'react'
  */
 import logo from './../assets/images/logo.svg'
 
-export default class Logo extends Component {
+interface Props {
+  className: string
+}
+
+export default class Logo extends Component<Props> {
 
   /**
    * Render the component
@@ -15,7 +19,7 @@ export default class Logo extends Component {
    */
   public render() {
   	return (
-  		<StyledLogo>
+  		<StyledLogo {...this.props}>
   			<img src={logo}/>
          	<StyledLogoText>FireBite</StyledLogoText>
   		</StyledLogo>

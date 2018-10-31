@@ -5,10 +5,13 @@ import { faTimes, faEdit } from '@fortawesome/free-solid-svg-icons'
 /**
  * Components
  */
-import Title from './Title'
+import Nav from './Nav'
+import Logo from './Logo'
 import Modal from './Modal'
+import Title from './Title'
 import Button from './Button'
 import TrackList from './TrackList'
+import Placeholder from './Placeholder'
 import TrackListItem from './TrackListItem'
 
 /**
@@ -87,7 +90,12 @@ export default class HomeContainer extends Component<Props> {
    * 
    * @return {void} 
    */
-  public toggleEditAlbumModal = () => this.setState({ showEditAlbumModal: !this.state.showEditAlbumModal })
+  public toggleEditAlbumModal = (id) => {
+    this.setState({ 
+      selectedAlbumId: id,
+      showEditAlbumModal: !this.state.showEditAlbumModal 
+    })
+  }
 
   /**
    * Show/Hide the modal.
@@ -107,7 +115,7 @@ export default class HomeContainer extends Component<Props> {
    * @param  {object} e 
    * @return {void}   
    */
-  public addAlbum = e => {
+  public addAlbum = (e) => {
     e.preventDefault()
 
     Album.store({
@@ -120,12 +128,20 @@ export default class HomeContainer extends Component<Props> {
 
   /**
    * Edit an existing album.
-   * 
+   *
    * @param  {object} e 
    * @return {void}   
    */
-  public editAlbum = e => {
+  public editAlbum = (e) => {
     e.preventDefault()
+
+    Album.update({
+      id: this.state.selectedAlbumId,
+      title: e.target.title.value
+    }).then(album => {
+      this.props.reloadAlbums()
+      this.toggleEditAlbumModal(0)
+    })
   }
 
   /**
@@ -134,7 +150,7 @@ export default class HomeContainer extends Component<Props> {
    * @param  {number} id 
    * @return {void}   
    */
-  public deleteAlbum = id => {
+  public deleteAlbum = (id) => {
     Album.destroy({ id }).then(response => {
       this.props.setAlbumState(this.props.albums.filter(album => album.id !== id))
     })
@@ -194,12 +210,15 @@ export default class HomeContainer extends Component<Props> {
 
     return (
       <Fragment>
-        <Button rounded={true} onClick={this.toggleAddAlbumModal}>Add Album</Button>
+        <Nav>
+          <Logo className="mr-a"/>
+          <Button rounded={true} onClick={this.toggleAddAlbumModal}>Add Album</Button>
+        </Nav>
         { albums && albums.length ? albums.map(album => 
           <Fragment key={`album-${album.id}`}>
             <Title>{album.title}</Title>
             <Button rounded={true} onClick={() => this.deleteAlbum(album.id)} className="mr-2">Delete Album</Button>
-            <Button rounded={true} onClick={() => this.toggleEditAlbumModal()} className="mr-2">Edit Album</Button>
+            <Button rounded={true} onClick={() => this.toggleEditAlbumModal(album.id)} className="mr-2">Edit Album</Button>
             <Button rounded={true} onClick={() => this.toggleAddTrackModal(album.id)}>Add Track</Button>
             <TrackList 
               tracks={album.tracks}
@@ -223,7 +242,7 @@ export default class HomeContainer extends Component<Props> {
               )}
             />
           </Fragment>
-        ) : <p>Try adding some albums!</p>}
+        ) :<Placeholder/>}
 
         <Modal show={this.state.showAddAlbumModal}>
           <form onSubmit={this.addAlbum}>
