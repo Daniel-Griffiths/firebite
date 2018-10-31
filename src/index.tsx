@@ -1,12 +1,9 @@
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import cssVars from 'css-vars-ponyfill';
 import React, { Component } from 'react';
 import initReactFastclick from 'react-fastclick';
-import { PersistGate } from 'redux-persist/integration/react';
 
 import Routes from './routes';
-import { store, persistor } from './configureStore';
 import registerServiceWorker from './registerServiceWorker';
 
 // Assets
@@ -60,13 +57,7 @@ observer.observe(appRoot, {
 
 export default class App extends Component {
   public render() {
-    return (
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <Routes />
-        </PersistGate>
-      </Provider>
-    );
+    return <Routes />
   }
 }
 

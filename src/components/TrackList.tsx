@@ -16,8 +16,9 @@ const AnimatedTrackList = posed.ul({
 import { TrackInterface } from './../interfaces'
 
 interface Props {
+  render: any,
+  className: string,
   tracks?: TrackInterface[],
-  render: any
 }
 
 export default class TrackList extends Component<Props> {
@@ -47,7 +48,7 @@ export default class TrackList extends Component<Props> {
     console.log(tracks)
 
   	return (
-  		<StyledTrackList pose={this.state.pose}>
+  		<StyledTrackList className={this.props.className} pose={this.state.pose}>
   			{tracks && tracks.map(track => this.props.render(track))}
   		</StyledTrackList>
   	)
