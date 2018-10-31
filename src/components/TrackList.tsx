@@ -48,7 +48,7 @@ export default class TrackList extends Component<Props> {
 
   	return (
   		<StyledTrackList pose={this.state.pose}>
-  			{tracks && tracks.length ? tracks.map(track => this.props.render(track)) : <p>Try adding some tracks!</p>}
+  			{tracks && tracks.map(track => this.props.render(track))}
   		</StyledTrackList>
   	)
   }

@@ -118,9 +118,12 @@ export default class HomeContainer extends Component<Props> {
   public addAlbum = (e) => {
     e.preventDefault()
 
+    const form = e.target
+
     Album.store({
-      title: e.target.title.value
+      title: form.title.value
     }).then(album => {
+      form.reset()
       this.props.reloadAlbums()
       this.toggleAddAlbumModal()
     })
@@ -134,11 +137,14 @@ export default class HomeContainer extends Component<Props> {
    */
   public editAlbum = (e) => {
     e.preventDefault()
+    
+    const form = e.target
 
     Album.update({
       id: this.state.selectedAlbumId,
-      title: e.target.title.value
+      title: form.title.value
     }).then(album => {
+      form.reset()
       this.props.reloadAlbums()
       this.toggleEditAlbumModal(0)
     })
@@ -165,11 +171,14 @@ export default class HomeContainer extends Component<Props> {
   public addTrack = e => {
     e.preventDefault()
 
+    const form = e.target
+
     Track.store({
       albumId: this.state.selectedAlbumId,  
-      title: e.target.title.value,
-      length: e.target.length.value,
+      title: form.title.value,
+      length: form.length.value,
     }).then(track => {
+      form.reset()
       this.props.reloadAlbums()
       this.toggleAddTrackModal(0)
     })
@@ -242,7 +251,7 @@ export default class HomeContainer extends Component<Props> {
               )}
             />
           </Fragment>
-        ) :<Placeholder/>}
+        ) : <Placeholder/>}
 
         <Modal show={this.state.showAddAlbumModal}>
           <form onSubmit={this.addAlbum}>
