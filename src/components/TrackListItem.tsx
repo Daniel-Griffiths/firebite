@@ -28,4 +28,17 @@ const StyledTrackListItem = styled(AnimatedTrackListItem)`
   padding: .5rem 0;
   align-items: center;
   border-bottom: 1px solid rgba(255,255,255,.2);
+
+  @media(max-width: 600px){
+    align-items: start;
+    flex-direction: column;
+
+    > div:first-child{
+      margin-bottom: .5rem;
+    }
+
+    > div:last-child{
+      margin-top: .5rem;
+    }
+  }
 `

@@ -89,4 +89,5 @@ const StyledModalContainer = styled(ModalContainer)`
   max-width: 25rem;
   border-radius: 3px;
   animation: fadeinUp 0.5s;
+  margin: 0 1rem;
 `

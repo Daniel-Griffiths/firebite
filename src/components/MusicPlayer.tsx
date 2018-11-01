@@ -13,8 +13,10 @@ import Title from './Title'
 import Button from './Button'
 import AlbumList from './AlbumList'
 import TrackList from './TrackList'
+import ButtonGroup from './ButtonGroup'
 import Placeholder from './Placeholder'
 import TrackListItem from './TrackListItem'
+import TrackListTitle from './TrackListTitle'
 
 /**
  * Models
@@ -307,22 +309,24 @@ export default class HomeContainer extends Component<Props> {
         { albums && albums.length ? albums.map(album => 
           <AlbumList key={`album-${album.id}`}>
             <Title>{album.title}</Title>
-            <Button rounded={true} onClick={() => this.deleteAlbum(album.id)} className="mr-2">Delete Album</Button>
-            <Button rounded={true} onClick={() => this.toggleEditAlbumModal(album.id)} className="mr-2">Edit Album</Button>
-            <Button rounded={true} onClick={() => this.toggleAddTrackModal(album.id)}>Add Track</Button>
+            <ButtonGroup>
+              <Button rounded={true} onClick={() => this.deleteAlbum(album.id)} className="mr-2">Delete Album</Button>
+              <Button rounded={true} onClick={() => this.toggleEditAlbumModal(album.id)} className="mr-2">Edit Album</Button>
+              <Button rounded={true} onClick={() => this.toggleAddTrackModal(album.id)}>Add Track</Button>
+            </ButtonGroup>
             <TrackList 
               className="mb-4"
               tracks={album.tracks}
               render={track => (
                 <TrackListItem key={`track-${track.id}`}>
-                  <div className="mr-a">
+                  <TrackListTitle className="mr-a">
                     {track.title}
-                  </div>
-                  <div>
+                  </TrackListTitle>
+                  <div className="mr-4">
                     {this.formatTrackLength(track.length)} 
                   </div>
                   <div>
-                    <Button onClick={() => this.toggleEditTrackModal(track.id, album.id)} className="ml-4 mr-2">
+                    <Button onClick={() => this.toggleEditTrackModal(track.id, album.id)} className="mr-2">
                       <FontAwesomeIcon icon={faEdit} />
                     </Button>
                     <Button onClick={() => this.deleteTrack({ albumId: album.id, id: track.id })}>
