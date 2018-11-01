@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export default styled.div`
 
-	@media(max-width: 600px){
+	@media(max-width: ${props => props.maxBreakpoint}px){
 		display: grid;
 		grid-template-columns: repeat(${props => props.children.length}, 1fr);
 

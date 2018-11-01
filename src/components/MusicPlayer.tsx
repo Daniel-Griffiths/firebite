@@ -309,7 +309,7 @@ export default class HomeContainer extends Component<Props> {
         { albums && albums.length ? albums.map(album => 
           <AlbumList key={`album-${album.id}`}>
             <Title>{album.title}</Title>
-            <ButtonGroup>
+            <ButtonGroup maxBreakpoint={600}>
               <Button rounded={true} onClick={() => this.deleteAlbum(album.id)} className="mr-2">Delete Album</Button>
               <Button rounded={true} onClick={() => this.toggleEditAlbumModal(album.id)} className="mr-2">Edit Album</Button>
               <Button rounded={true} onClick={() => this.toggleAddTrackModal(album.id)}>Add Track</Button>
