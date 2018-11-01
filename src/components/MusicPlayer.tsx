@@ -73,7 +73,11 @@ export default class HomeContainer extends Component<Props> {
    * 
    * @return {void} 
    */
-  public scrollToBottom = () => window.scroll({ top: document.body.scrollHeight, left: 0, behavior: 'smooth' })
+  public scrollToBottom = () => { 
+    setTimeout(() => {
+      window.scroll({ top: document.body.scrollHeight, left: 0, behavior: 'smooth' })
+    }, 300)
+  }
 
   /**
    * Close all modals when pressing the esc key
@@ -342,7 +346,7 @@ export default class HomeContainer extends Component<Props> {
         <Modal show={this.state.showAddAlbumModal}>
           <form onSubmit={this.addAlbum}>
             <label htmlFor="add-album-title">Album Title</label>
-            <input name="title" id="album-title" className="mb-4" required={true}/>
+            <input name="title" id="album-title" className="mb-4" required={true} />
             <button type="button" className="mr-4" onClick={this.closeAllModals}>Cancel</button>
             <button>Submit</button>
           </form>
@@ -351,7 +355,7 @@ export default class HomeContainer extends Component<Props> {
         <Modal show={this.state.showEditAlbumModal}>
           <form onSubmit={this.editAlbum}>
             <label htmlFor="edit-album-title">Album Title</label>
-            <input name="title" id="edit-album-title" className="mb-4" required={true}/>
+            <input name="title" id="edit-album-title" className="mb-4" required={true} />
             <button type="button" className="mr-4" onClick={this.closeAllModals}>Cancel</button>
             <button>Submit</button>
           </form>
@@ -360,9 +364,9 @@ export default class HomeContainer extends Component<Props> {
         <Modal show={this.state.showAddTrackModal}>
           <form onSubmit={this.addTrack}>
             <label htmlFor="add-track-title">Track Title</label>
-            <input name="title" id="add-track-title" className="mb-4" required={true}/>
+            <input name="title" id="add-track-title" className="mb-4" required={true} />
             <label htmlFor="add-track-length">Track Length (in seconds)</label>
-            <input name="length" id="add-track-length" className="mb-4" type="number" required={true}/>
+            <input name="length" id="add-track-length" className="mb-4" type="number" required={true} />
             <button type="button" className="mr-4" onClick={this.closeAllModals}>Cancel</button>
             <button>Submit</button>
           </form>
@@ -371,9 +375,9 @@ export default class HomeContainer extends Component<Props> {
         <Modal show={this.state.showEditTrackModal}>
           <form onSubmit={this.editTrack}>
             <label htmlFor="edit-track-title">Track Title</label>
-            <input name="title" id="edit-track-title" className="mb-4" required={true}/>
+            <input name="title" id="edit-track-title" className="mb-4" required={true} />
             <label htmlFor="edit-track-length">Track Length (in seconds)</label>
-            <input name="length" id="edit-track-length" className="mb-4" type="number" required={true}/>
+            <input name="length" id="edit-track-length" className="mb-4" type="number" required={true} />
             <button type="button" className="mr-4" onClick={this.closeAllModals}>Cancel</button>
             <button>Submit</button>
           </form>
