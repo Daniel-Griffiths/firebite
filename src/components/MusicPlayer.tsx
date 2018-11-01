@@ -199,10 +199,10 @@ export default class HomeContainer extends Component<Props> {
    */
   public deleteAlbum = (id) => {
     swal({
-      title: 'Are you sure?',
+      title: 'Delete Album',
       text: 'Are you sure you want to delete this album?',
       icon: 'warning',
-      buttons: [true, true],
+      buttons: ['Cancel','Delete'],
     })
     .then(confirm => {
       if (confirm) {
@@ -266,10 +266,10 @@ export default class HomeContainer extends Component<Props> {
    */
   public deleteTrack = ({ albumId, id }) => {
     swal({
-      title: 'Are you sure?',
+      title: 'Delete Track',
       text: 'Are you sure you want to delete this track?',
       icon: 'warning',
-      buttons: [true, true],
+      buttons: ['Cancel','Delete'],
     })
     .then(confirm => {
       if (confirm) {

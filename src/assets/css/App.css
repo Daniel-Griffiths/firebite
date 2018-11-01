@@ -73,6 +73,10 @@ button{
   outline: 0;
 }
 
+button:hover{
+  background: rgba(0,0,0,.05);
+}
+
 /*
 |--------------------------------------
 | Animations
@@ -107,6 +111,41 @@ button{
   to {
     transform: rotate(360deg);
   }
+}
+
+/*
+|--------------------------------------
+| Sweet Alert
+|--------------------------------------
+|
+*/
+
+.swal-overlay{
+  background-color: rgba(0,0,0,.8);
+}
+
+.swal-modal{
+  border-radius: 3px;
+}
+
+.swal-button{
+  width: 100px;
+  font-size: initial;
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.swal-button--confirm{
+  background-color: #f97c7c;
+}
+
+.swal-button--confirm:not([disabled]):hover{
+  background-color: #c56464;
+}
+
+.swal-footer{
+  text-align: center;
 }
 
 /*
