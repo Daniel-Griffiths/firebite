@@ -45,7 +45,6 @@ export default class TrackList extends Component<Props> {
   public render() {
 
   	const { tracks } = this.props
-    console.log(tracks)
 
   	return (
   		<StyledTrackList className={this.props.className} pose={this.state.pose}>

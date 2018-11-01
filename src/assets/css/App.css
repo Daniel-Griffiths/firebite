@@ -229,3 +229,9 @@ button:hover{
 .ml-4 {
   margin-left: 1rem;
 }
+
+@media(max-width: 600px){
+  .hide-on-mobile{
+    display: none;
+  }
+}

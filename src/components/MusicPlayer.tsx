@@ -314,12 +314,12 @@ export default class HomeContainer extends Component<Props> {
           <AlbumList key={`album-${album.id}`}>
             <Title>{album.title}</Title>
             <ButtonGroup maxBreakpoint={600}>
-              <Button rounded={true} onClick={() => this.deleteAlbum(album.id)} className="mr-2">Delete Album</Button>
-              <Button rounded={true} onClick={() => this.toggleEditAlbumModal(album.id)} className="mr-2">Edit Album</Button>
+              <Button rounded={true} onClick={() => this.deleteAlbum(album.id)} className="mr-2">Delete <span className="hide-on-mobile">Album</span></Button>
+              <Button rounded={true} onClick={() => this.toggleEditAlbumModal(album.id)} className="mr-2">Edit <span className="hide-on-mobile">Album</span></Button>
               <Button rounded={true} onClick={() => this.toggleAddTrackModal(album.id)}>Add Track</Button>
             </ButtonGroup>
             <TrackList 
-              className="mb-4"
+              className="mt-2 mb-4"
               tracks={album.tracks}
               render={track => (
                 <TrackListItem key={`track-${track.id}`}>
