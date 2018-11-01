@@ -6,11 +6,12 @@ An api driven music manager written in React.
 
 # Usage 
 
-Install all the dependencies 
+Rename `.env.example` to `.env` and enter the relevant api details
+
+Then install all the dependencies and run the app
 
 `yarn install && yarn start`
 
-Then rename `.env.example` to `.env` and enter the relevant api details
 
 # API
 
