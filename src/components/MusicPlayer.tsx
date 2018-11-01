@@ -67,6 +67,13 @@ export default class HomeContainer extends Component<Props> {
   }  
 
   /**
+   * Scroll to the bottom of the page.
+   * 
+   * @return {void} 
+   */
+  public scrollToBottom = () => window.scroll({ top: document.body.scrollHeight, left: 0, behavior: 'smooth' })
+
+  /**
    * Close all modals when pressing the esc key
    * 
    * @param  {object} e 
@@ -157,6 +164,7 @@ export default class HomeContainer extends Component<Props> {
       form.reset()
       this.props.reloadAlbums()
       this.toggleAddAlbumModal()
+      this.scrollToBottom()
     })
   }
 
