@@ -100,10 +100,7 @@ export default class HomeContainer extends Component<Props> {
    * @return {void} 
    */
   public closeAllModals = () => {
-      this.setState({
-        selectedAlbumTitle: '',
-        selectedTrackTitle: '',
-        selectedTrackLength: '',        
+      this.setState({    
         showAddAlbumModal: false,
         showAddTrackModal: false,
         showEditAlbumModal: false,
