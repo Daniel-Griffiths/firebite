@@ -39,6 +39,9 @@ export default class HomeContainer extends Component<Props> {
   public state = {
     selectedTrackId: 0,
     selectedAlbumId: 0,
+    selectedAlbumTitle: '',
+    selectedTrackTitle: '',
+    selectedTrackLength: '',
     showAddAlbumModal: false,
     showAddTrackModal: false,
     showEditAlbumModal: false,
@@ -98,6 +101,9 @@ export default class HomeContainer extends Component<Props> {
    */
   public closeAllModals = () => {
       this.setState({
+        selectedAlbumTitle: '',
+        selectedTrackTitle: '',
+        selectedTrackLength: '',        
         showAddAlbumModal: false,
         showAddTrackModal: false,
         showEditAlbumModal: false,
@@ -115,12 +121,13 @@ export default class HomeContainer extends Component<Props> {
   /**
    * Show/Hide the modal.
    *
-   * @param  {number} id
+   * @param  {object} id, title
    * @return {void} 
    */
-  public toggleEditAlbumModal = (id) => {
+  public toggleEditAlbumModal = ({ id, title }) => {
     this.setState({ 
       selectedAlbumId: id,
+      selectedAlbumTitle: title,
       showEditAlbumModal: !this.state.showEditAlbumModal 
     })
   }
@@ -128,10 +135,10 @@ export default class HomeContainer extends Component<Props> {
   /**
    * Show/Hide the modal.
    *
-   * @param  {number} id
+   * @param  {object} id
    * @return {void} 
    */
-  public toggleAddTrackModal = (id) => {
+  public toggleAddTrackModal = ({ id }) => {
     this.setState({ 
       selectedAlbumId: id,
       showAddTrackModal: !this.state.showAddTrackModal, 
@@ -141,14 +148,16 @@ export default class HomeContainer extends Component<Props> {
   /**
    * Show/Hide the modal.
    *
-   * @param  {number} id
+   * @param  {object} id, title, length
    * @param  {number} albumId  
    * @return {void} 
    */
-  public toggleEditTrackModal = (id, albumId) => {
+  public toggleEditTrackModal = ({ id, title, length }, albumId) => {
     this.setState({ 
       selectedTrackId: id,
       selectedAlbumId: albumId,
+      selectedTrackTitle: title,
+      selectedTrackLength: length,
       showEditTrackModal: !this.state.showEditTrackModal 
     })
   }  
@@ -191,17 +200,17 @@ export default class HomeContainer extends Component<Props> {
     }).then(album => {
       form.reset()
       this.props.reloadAlbums()
-      this.toggleEditAlbumModal(0)
+      this.toggleEditAlbumModal({ id: 0, title: '' })
     })
   }
 
   /**
    * Delete a album.
    * 
-   * @param  {number} id 
+   * @param  {object} id 
    * @return {void}   
    */
-  public deleteAlbum = (id) => {
+  public deleteAlbum = ({ id }) => {
     swal({
       title: 'Delete Album',
       text: 'Are you sure you want to delete this album?',
@@ -235,7 +244,7 @@ export default class HomeContainer extends Component<Props> {
     }).then(track => {
       form.reset()
       this.props.reloadAlbums()
-      this.toggleAddTrackModal(0)
+      this.toggleAddTrackModal({ id: 0 })
     })
   }
 
@@ -258,7 +267,7 @@ export default class HomeContainer extends Component<Props> {
     }).then(track => {
       form.reset()
       this.props.reloadAlbums()
-      this.toggleEditTrackModal(0,0)
+      this.toggleEditTrackModal({ id: 0, title: '', length: '' }, 0)
     })
   }  
 
@@ -314,9 +323,9 @@ export default class HomeContainer extends Component<Props> {
           <AlbumList key={`album-${album.id}`}>
             <Title>{album.title}</Title>
             <ButtonGroup maxBreakpoint={600}>
-              <Button rounded={true} onClick={() => this.deleteAlbum(album.id)} className="mr-2">Delete <span className="hide-on-mobile">Album</span></Button>
-              <Button rounded={true} onClick={() => this.toggleEditAlbumModal(album.id)} className="mr-2">Edit <span className="hide-on-mobile">Album</span></Button>
-              <Button rounded={true} onClick={() => this.toggleAddTrackModal(album.id)}>Add Track</Button>
+              <Button rounded={true} onClick={() => this.deleteAlbum(album)} className="mr-2">Delete <span className="hide-on-mobile">Album</span></Button>
+              <Button rounded={true} onClick={() => this.toggleEditAlbumModal(album)} className="mr-2">Edit <span className="hide-on-mobile">Album</span></Button>
+              <Button rounded={true} onClick={() => this.toggleAddTrackModal(album)}>Add Track</Button>
             </ButtonGroup>
             <TrackList 
               className="mt-2 mb-4"
@@ -330,7 +339,7 @@ export default class HomeContainer extends Component<Props> {
                     {this.formatTrackLength(track.length)} 
                   </div>
                   <div>
-                    <Button onClick={() => this.toggleEditTrackModal(track.id, album.id)} className="mr-2">
+                    <Button onClick={() => this.toggleEditTrackModal(track, album.id)} className="mr-2">
                       <FontAwesomeIcon icon={faEdit} />
                     </Button>
                     <Button onClick={() => this.deleteTrack({ albumId: album.id, id: track.id })}>
@@ -355,7 +364,7 @@ export default class HomeContainer extends Component<Props> {
         <Modal show={this.state.showEditAlbumModal}>
           <form onSubmit={this.editAlbum}>
             <label htmlFor="edit-album-title">Album Title</label>
-            <input name="title" id="edit-album-title" className="mb-4" required={true} />
+            <input defaultValue={this.state.selectedAlbumTitle} name="title" id="edit-album-title" className="mb-4" required={true} />
             <button type="button" className="mr-4" onClick={this.closeAllModals}>Cancel</button>
             <button>Submit</button>
           </form>
@@ -375,9 +384,9 @@ export default class HomeContainer extends Component<Props> {
         <Modal show={this.state.showEditTrackModal}>
           <form onSubmit={this.editTrack}>
             <label htmlFor="edit-track-title">Track Title</label>
-            <input name="title" id="edit-track-title" className="mb-4" required={true} />
+            <input defaultValue={this.state.selectedTrackTitle} name="title" id="edit-track-title" className="mb-4" required={true} />
             <label htmlFor="edit-track-length">Track Length (in seconds)</label>
-            <input name="length" id="edit-track-length" className="mb-4" type="number" required={true} />
+            <input defaultValue={this.state.selectedTrackLength} name="length" id="edit-track-length" className="mb-4" type="number" required={true} />
             <button type="button" className="mr-4" onClick={this.closeAllModals}>Cancel</button>
             <button>Submit</button>
           </form>
