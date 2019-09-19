@@ -10,7 +10,7 @@
     "axios": "^0.18.0",
     "css-vars-ponyfill": "^1.10.0",
     "lodash": "^4.17.11",
-    "normalize.css": "^8.0.0",
+    "normalize.css": "^8.0.1",
     "react": "^16.6.0",
     "react-dom": "^16.5.2",
     "react-fastclick": "^3.0.2",
