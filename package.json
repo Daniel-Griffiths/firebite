@@ -14,7 +14,7 @@
     "react": "^16.6.0",
     "react-dom": "^16.9.0",
     "react-fastclick": "^3.0.2",
-    "react-pose": "^3.3.7",
+    "react-pose": "^4.0.8",
     "react-router-dom": "^5.1.1",
     "react-scripts-ts": "^3.1.0",
     "styled-components": "^4.3.2",
