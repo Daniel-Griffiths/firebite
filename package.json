@@ -5,7 +5,7 @@
   "private": false,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.4",
-    "@fortawesome/free-solid-svg-icons": "^5.3.1",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "axios": "^0.18.0",
     "css-vars-ponyfill": "^1.10.0",
