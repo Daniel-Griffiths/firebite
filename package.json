@@ -12,7 +12,7 @@
     "lodash": "^4.17.11",
     "normalize.css": "^8.0.1",
     "react": "^16.6.0",
-    "react-dom": "^16.9.0",
+    "react-dom": "^16.10.1",
     "react-fastclick": "^3.0.2",
     "react-pose": "^3.3.7",
     "react-router-dom": "^5.1.1",
