@@ -8,7 +8,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "axios": "^0.18.0",
-    "css-vars-ponyfill": "^1.10.0",
+    "css-vars-ponyfill": "^2.1.2",
     "lodash": "^4.17.11",
     "normalize.css": "^8.0.1",
     "react": "^16.10.2",
