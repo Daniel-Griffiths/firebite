@@ -2174,9 +2174,9 @@ css-to-react-native@^2.2.2:
     fbjs "^0.8.5"
     postcss-value-parser "^3.3.0"
 
-css-vars-ponyfill@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/css-vars-ponyfill/-/css-vars-ponyfill-2.1.2.tgz#0de2e49e72a6bac09cb456a0325c8584cadaecd2"
+css-vars-ponyfill@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/css-vars-ponyfill/-/css-vars-ponyfill-2.2.1.tgz#c97dcfb3efc93b479661af58afa04cb0ef5b97e6"
 
 css-what@2.1:
   version "2.1.2"
