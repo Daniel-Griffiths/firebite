@@ -1,6 +1,6 @@
 # FireBite
 
-An api driven music manager written in React.
+An api driven music manager written in React. This was made for my code test at https://intech.ventures/ 😎
 
 ![App Image](screenshot.png)
 
